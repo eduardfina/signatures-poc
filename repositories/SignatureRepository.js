@@ -24,7 +24,7 @@ exports.createOrModifySignature = async function (user, blockchain, contractAddr
 }
 
 exports.codifyData = async function (user, blockchain, contractAddress, senderAddress, data) {
-  const codifier = await getCodificator(user, blockchain, contractAddress, senderAddress)
+  const codifier = await getCodifier(user, blockchain, contractAddress, senderAddress)
   const codifiedData = await encryptData(data, codifier)
   const encodedData = encodeURIComponent(codifiedData)
 
@@ -72,7 +72,7 @@ exports.getSignatureByHash = async function (hash) {
   return signature
 }
 
-getCodificator = async function (user, blockchain, contractAddress, senderAddress) {
+getCodifier = async function (user, blockchain, contractAddress, senderAddress) {
   const signature = await Signatures.findOne({user, blockchain, contractAddress, senderAddress})
 
   if (!signature) {
